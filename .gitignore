@@ -222,7 +222,6 @@ pip-log.txt
 *.userprefs
 /*.csproj
 *.pidb
-*.meta
 
 *.user
 *.unityproj
@@ -238,5 +237,4 @@ pip-log.txt
 [Tt]emp/
 [Ll]ibrary/*
 !Library/*.asset
-!Library/ScriptAssemblies
 [Oo]bj/
