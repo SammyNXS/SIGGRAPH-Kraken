@@ -214,18 +214,16 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-#Unity
-[Ll]ibrary
-[Tt]emp
+#############
+## Unity
+#############
 
-ExportedObj/
-obj/
 *.svd
 *.userprefs
 /*.csproj
 *.pidb
-*.suo
-/*.sln
+*.meta
+
 *.user
 *.unityproj
 *.booproj
@@ -236,3 +234,9 @@ obj/
 *.sln
 *.suo
 *.user
+
+[Tt]emp/
+[Ll]ibrary/*
+!Library/*.asset
+!Library/ScriptAssemblies
+[Oo]bj/
