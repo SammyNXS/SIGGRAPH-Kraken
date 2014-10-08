@@ -34,11 +34,11 @@ public class Character : MonoBehaviour
 
 	void MoveExample()
 	{
-		float speed = 6.0F;
+		float speed = 3.0F;
 		float jumpSpeed = 8.0F;
 		float jumpPower = 10.0F;
 
-		float gravity = 80.0F;
+		float gravity = 160.0F;
 		Vector3 moveDirection = Vector3.zero;
 
 		CharacterController controller = GetComponent<CharacterController>();
@@ -47,7 +47,11 @@ public class Character : MonoBehaviour
 		moveDirection = transform.TransformDirection(moveDirection);
 		moveDirection *= speed;
 
-		if (controller.isGrounded) jumpCounter = jumpPower;
+		if (controller.isGrounded) 
+		{
+			jumpCounter = jumpPower;
+			moveDirection *= 2;
+		}
 		else if(!controller.isGrounded && !Input.GetButton("Jump")) jumpCounter = 0;
 		else if(jumpCounter > 0) jumpCounter -= 1*Time.deltaTime;
 
