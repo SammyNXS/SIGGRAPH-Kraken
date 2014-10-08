@@ -65,16 +65,13 @@ public class Character : MonoBehaviour
 		float horizontalSpeed = 7.0F;
 		float verticalSpeed = 7.0F;
 
-		if(!this.GetComponentInChildren<HUD>().getPauseState())
-		{
-			//Rotates Player on "X" Axis Acording to Mouse Input
-			hRotation += horizontalSpeed * Input.GetAxis("Mouse X");
-			transform.localEulerAngles = new Vector3(0, hRotation, 0);
-			
-			//Rotates Player on "Y" Axis Acording to Mouse Input
-			vRotation = Mathf.Clamp(vRotation - verticalSpeed * Input.GetAxis("Mouse Y"), -90,90);
-			Camera.mainCamera.transform.localEulerAngles = new Vector3(vRotation, 0, 0);
-		}
+		//Rotates Player on "X" Axis Acording to Mouse Input
+		hRotation += horizontalSpeed * Input.GetAxis("Mouse X");
+		transform.localEulerAngles = new Vector3(0, hRotation, 0);
+		
+		//Rotates Player on "Y" Axis Acording to Mouse Input
+		vRotation = Mathf.Clamp(vRotation - verticalSpeed * Input.GetAxis("Mouse Y"), -90,90);
+		Camera.mainCamera.transform.localEulerAngles = new Vector3(vRotation, 0, 0);
 	}
 
 }

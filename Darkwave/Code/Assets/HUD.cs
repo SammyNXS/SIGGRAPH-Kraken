@@ -23,7 +23,7 @@ public class HUD : MonoBehaviour
 	//Starts the game paused.
 	void Start()
 	{
-		Time.timeScale = 0.0f;
+		Time.timeScale = 1.0f;
 	}
 
 	//This function is called every update.
