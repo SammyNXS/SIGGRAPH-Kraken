@@ -1,23 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Character : MonoBehaviour 
+public class Character : Entity 
 {
 	float jumpCounter = 0.0F;//Used for MoveExample()
-	public float hRotation = 0F, vRotation = 0F;//Used in CameraControlExample()
-	public int health=0, energy=0;
+	float hRotation = 0F, vRotation = 0F;//Used in CameraControlExample()
 
-	// Use this for initialization
-	void Start () 
-	{
-	
-	}
-	
+	//Shot attack variables are in entity
 
 	void Update() 
 	{
-		MoveExample();
 		CameraControlExample();
+		MoveExample();
+		if(Input.GetButton("Fire1")) ShootExample();
+		StatusUpdate();
 	}
 
 	void SimpleMoveExample()
@@ -34,18 +30,18 @@ public class Character : MonoBehaviour
 
 	void MoveExample()
 	{
-		float speed = 3.0F;
-		float jumpSpeed = 8.0F;
-		float jumpPower = 10.0F;
+		float walkSpeed = 6.0F;
+		float jumpSpeed = 20.0F;
+		float jumpPower = 1.0F;
 
-		float gravity = 160.0F;
+		float gravity = 500.0F;
 		Vector3 moveDirection = Vector3.zero;
 
 		CharacterController controller = GetComponent<CharacterController>();
 
 		moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		moveDirection = transform.TransformDirection(moveDirection);
-		moveDirection *= speed;
+		moveDirection *= walkSpeed;
 
 		if (controller.isGrounded) 
 		{
@@ -57,8 +53,6 @@ public class Character : MonoBehaviour
 
 		if (Input.GetButton("Jump") && jumpCounter > 0) moveDirection.y = jumpSpeed;
 			
-		
-
 		moveDirection.y -= gravity * Time.deltaTime;
 		controller.Move(moveDirection * Time.deltaTime);
 		
@@ -70,12 +64,20 @@ public class Character : MonoBehaviour
 		float verticalSpeed = 7.0F;
 
 		//Rotates Player on "X" Axis Acording to Mouse Input
-		hRotation += horizontalSpeed * Input.GetAxis("Mouse X");
+		hRotation = (hRotation + horizontalSpeed * Input.GetAxis("Mouse X"))%360;
 		transform.localEulerAngles = new Vector3(0, hRotation, 0);
 		
 		//Rotates Player on "Y" Axis Acording to Mouse Input
 		vRotation = Mathf.Clamp(vRotation - verticalSpeed * Input.GetAxis("Mouse Y"), -90,90);
 		Camera.mainCamera.transform.localEulerAngles = new Vector3(vRotation, 0, 0);
+
 	}
 
+	void ShootExample()
+	{
+		shotSpawnPosition = this.gameObject.transform.position;
+		//shotSpawnRotation = gameObject.transform.rotation;
+		shotSpawnRotation = Camera.mainCamera.transform.rotation;
+		ShotAttack();
+	}
 }
