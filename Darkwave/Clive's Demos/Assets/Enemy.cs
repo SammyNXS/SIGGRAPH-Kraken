@@ -4,19 +4,11 @@ using System.Collections;
 */
 public class Enemy : NPC 
 {
-	//Behavior variables (set in editor)
-	public int behavior;
-	public int patrolSize;
-	public int sensorRange;
-	public int engagementRange;
-	public bool inSight;
-	public int interest;
-	public int attentionSpan;
-	public int distance;
-	public GameObject target;
+
+
 	public GameObject[] targets;
 	public Vector2 targetLastPosition;
-	public Vector2 startPosition;
+
 	
 
 	// Use this for initialization

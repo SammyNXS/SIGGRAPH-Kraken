@@ -3,6 +3,20 @@ using System.Collections;
 
 public class NPC : Entity 
 {
+	//Behavior variables (set in editor)
+	public int behavior;
+	public int patrolSize;
+	public int sensorRange;
+	public int engagementRange;
+	public bool inSight;
+	public int interest;
+	public int attentionSpan;
+	public int distance;
+	public GameObject target;
+
+
+	public Vector2 startPosition;
+
 	//Movement
 	public float jumpHeight;// set in editor
 	public float falling = -20;
