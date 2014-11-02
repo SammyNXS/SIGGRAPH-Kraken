@@ -15,6 +15,7 @@ public class Entity : MonoBehaviour
 	public int energy;
 	public int maxEnergy;	//set in editor
 	public int touchDamage;	//set in editor
+	public int stun=0;
 
 
 	//Movement variables

@@ -3,9 +3,6 @@ using System.Collections;
 
 public class NPC : Entity 
 {
-	//Status
-	public int stun = 0;
-
 	//Movement
 	public float jumpHeight;// set in editor
 	public float falling = -20;
