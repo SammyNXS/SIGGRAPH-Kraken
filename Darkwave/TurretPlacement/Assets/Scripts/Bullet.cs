@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bullet : MonoBehaviour {
-
+public class Bullet : MonoBehaviour 
+{
 	float timeLimit, time;
 
 	// Use this for initialization
 	void Start () 
 	{
 		//limits life of bullet
-		timeLimit = 20;
+		timeLimit = 50;
 		time = 0;
 		//adds forward momentum
 		rigidbody.AddForce(transform.forward * 500);
@@ -19,12 +19,11 @@ public class Bullet : MonoBehaviour {
 	void Update () 
 	{
 		time ++;
-
+        
 		//if time limit reached bullet destroys itself
 		if(time > timeLimit)
 		{
 			Destroy(gameObject);
 		}
 	}
-
 }

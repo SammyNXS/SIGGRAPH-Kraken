@@ -31,17 +31,23 @@ public class CharacterControl : MonoBehaviour
 		float xAxisValue = Input.GetAxis("Horizontal");
 		float zAxisValue = Input.GetAxis("Vertical");
 
-		//applys translations(moves character)
-		transform.Translate(new Vector3(xAxisValue * 0.1f, 0.0f, zAxisValue * 0.1f));
+		float yAxisValue = Input.GetAxis("Jump");
 
-		//press p to put down turret
-		if(Input.GetKeyDown(KeyCode.P))
-		{
-			//if raycast hits something gets information and puts in hit, hit carries the position of the raycast collision
-			if(Physics.Raycast(transform.position, transform.forward,out hit))
-			{
-				Instantiate(turret, hit.point, Quaternion.identity);
-			}
-		}
+		//applys translations(moves character)
+		transform.Translate(new Vector3(xAxisValue * 0.1f, yAxisValue * 0.1f, zAxisValue * 0.1f));
+    }
+
+    void FixedUpdate()
+    {
+        //press p to put down turret
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log("P WAS PRESSED");
+            //if raycast hits something gets information and puts in hit, hit carries the position of the raycast collision
+            if (Physics.Raycast(transform.FindChild("placementPointer").transform.position, transform.forward, out hit))
+            {
+                Instantiate(turret, hit.point, Quaternion.identity);
+            }
+        }
     }
 }
