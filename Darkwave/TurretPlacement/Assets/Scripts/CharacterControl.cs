@@ -5,12 +5,18 @@ public class CharacterControl : MonoBehaviour
 {
 	private float hRotation, vRotation;
 	private RaycastHit hit;
-	public Transform turret;
+	private GameObject turret;
+    public Transform tPrefab, turretReal;
+    public bool placingStage;
+    private Vector3 gridPos;
+    public GameObject grid;
 	
 	void Start () 
 	{
 		hRotation = 0f;
 		vRotation = 0f;
+        placingStage = false;
+        grid = GameObject.FindGameObjectWithTag("Ground");
 	}
 
 	void Update () 
@@ -34,20 +40,51 @@ public class CharacterControl : MonoBehaviour
 		float yAxisValue = Input.GetAxis("Jump");
 
 		//applys translations(moves character)
-		transform.Translate(new Vector3(xAxisValue * 0.1f, yAxisValue * 0.1f, zAxisValue * 0.1f));
-    }
+		transform.Translate(new Vector3(xAxisValue * 0.8f, yAxisValue * 0.8f, zAxisValue * 0.8f));
 
-    void FixedUpdate()
-    {
-        //press p to put down turret
         if (Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log("P WAS PRESSED");
-            //if raycast hits something gets information and puts in hit, hit carries the position of the raycast collision
-            if (Physics.Raycast(transform.FindChild("placementPointer").transform.position, transform.forward, out hit))
+            placingStage = true;
+            if (Physics.Raycast(transform.position, transform.forward, out hit))
             {
-                Instantiate(turret, hit.point, Quaternion.identity);
+                turret = Instantiate(tPrefab.gameObject, hit.point, Quaternion.identity) as GameObject;
             }
         }
+
+        if(placingStage)
+            placing();
+
+
     }
+
+    void placing()
+    {
+        float yValue = 0.0f;
+        grid.SendMessage("building", true);
+        if (Physics.Raycast(transform.position, transform.forward, out hit))
+        {
+            grid.SendMessage("RecievePosition", hit.point, SendMessageOptions.RequireReceiver);
+            yValue = hit.point.y;
+            yValue += 0.8f;
+        }
+
+            gridPos.y = yValue;
+            turret.transform.position = gridPos;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(turretReal, gridPos, Quaternion.identity);
+            Destroy(turret);
+            placingStage = false;
+            grid.SendMessage("building", false);
+        }
+
+    }
+
+    public void RecieveGridPos(Vector2 pos)
+    {
+        gridPos.x = pos.x;
+        gridPos.z = pos.y;
+    }
+
 }

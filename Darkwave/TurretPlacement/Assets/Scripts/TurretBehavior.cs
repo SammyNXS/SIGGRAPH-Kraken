@@ -5,89 +5,63 @@ public class TurretBehavior : MonoBehaviour
 {
 	public GameObject Target;
 	public Transform shot;
-	private bool placed;
 	private int time;
 	private float turnSpeed;
-	public GameObject player;
-    
+    private Transform topTurret;
+    private RaycastHit laser;
+    private LineRenderer line;
+
     // Use this for initialization
 	void Start () 
 	{
 		Target = null;
 		time = 0;
-		placed = false;
 
-		player = GameObject.Find("Player");
+        topTurret = transform.FindChild("TurretTop").transform;
 
-		//makes sure theres no rotation
-		transform.rotation = Quaternion.identity;
-
-		//makes sure that turret is on ground
-		Vector3 temp = transform.position;
-		temp.y = 0.4f;
-		transform.position = temp;
-
-		//changes look for placing
-		gameObject.renderer.material.shader = Shader.Find("Transparent/Diffuse");
-		gameObject.renderer.material.color = Color.cyan;
-
-        //turn off so collider doesnt interfere with raycast
-        gameObject.collider.enabled = false;
+        line = topTurret.GetComponentInChildren<LineRenderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		//if turret has been placed
-        if (placed)
+        //shortens distance of light and line so that it doesnt go through things
+        if (Physics.Raycast(topTurret.FindChild("LaserSight").position, topTurret.forward, out laser))
         {
-            if (Target != null)
-            {
-                // point at target
-                transform.LookAt(Target.transform);
-                time++;
-
-                //lets time pass before another shot can be taken
-                if (time > 10)
-                {
-                    Instantiate(shot, transform.FindChild("bulletSpawn1").transform.position, transform.rotation);
-                    Instantiate(shot, transform.FindChild("bulletSpawn2").transform.position, transform.rotation);
-                    time = 0;
-                }
-            }
+            line.SetPosition(1, new Vector3(0, 0, laser.distance / 40));
+            topTurret.FindChild("LaserSight").light.range = (laser.distance) + 10;
         }
         else
-            placement();
+        {
+            line.SetPosition(1, new Vector3(0, 0, 1));
+            topTurret.FindChild("LaserSight").light.range = (50) + 15;
+        }
 
-	}
+        //adds subtle floating effect
+        Vector3 temp = topTurret.position;
+        temp.y = temp.y + Mathf.Clamp(Mathf.Sin(Time.time) * 0.003f, -0.5f, 1f);
+        topTurret.position = temp;
 
-    void placement()
-    {
-            RaycastHit tempPos;
-            Vector3 vecTemp;
+        if (Target != null)
+        {
+            // point at target
+            topTurret.LookAt(Target.transform);
+            time++;
 
-            //if raycast hits something gets information and puts in tempPos, tempPos carries the position of the raycast collision
-            if (Physics.Raycast(player.transform.FindChild("placementPointer").position, player.transform.forward, out tempPos))
+            //lets time pass before another shot can be taken
+            if (time > 10)
             {
-                vecTemp = tempPos.point;
-                vecTemp.y = 0.4f;
-                transform.position = vecTemp;
+                Instantiate(shot, topTurret.FindChild("bulletSpawn1").transform.position, topTurret.rotation);
+                Instantiate(shot, topTurret.FindChild("bulletSpawn2").transform.position, topTurret.rotation);
+                Instantiate(shot, topTurret.FindChild("bulletSpawn3").transform.position, topTurret.rotation);
+                Instantiate(shot, topTurret.FindChild("bulletSpawn4").transform.position, topTurret.rotation);
+                time = 0;
             }
-
-            //if left mouse
-            if (Input.GetMouseButtonDown(0))
-            {
-                placed = true;
-                gameObject.renderer.material.shader = Shader.Find("Diffuse");
-                gameObject.renderer.material.color = Color.gray;
-                //turn collider back on
-                gameObject.collider.enabled = true;
-            }
+        }
     }
 
 	void OnTriggerStay(Collider other) 
 	{
-		//if previous target died while in collider get a new one if in range
 		if(other.gameObject.tag == "Enemy" && Target == null)
 			Target = other.gameObject;
 	}
