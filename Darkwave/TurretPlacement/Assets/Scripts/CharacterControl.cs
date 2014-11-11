@@ -42,7 +42,7 @@ public class CharacterControl : MonoBehaviour
 		//applys translations(moves character)
 		transform.Translate(new Vector3(xAxisValue * 0.8f, yAxisValue * 0.8f, zAxisValue * 0.8f));
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && !placingStage)
         {
             placingStage = true;
             if (Physics.Raycast(transform.position, transform.forward, out hit))
@@ -67,13 +67,13 @@ public class CharacterControl : MonoBehaviour
             yValue = hit.point.y;
             yValue += 0.8f;
         }
-
+        turret.transform.Rotate(Vector3.up, Input.GetAxis("Mouse ScrollWheel") * 40.0f);
             gridPos.y = yValue;
             turret.transform.position = gridPos;
 
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(turretReal, gridPos, Quaternion.identity);
+            Instantiate(turretReal, gridPos, turret.transform.rotation);
             Destroy(turret);
             placingStage = false;
             grid.SendMessage("building", false);
