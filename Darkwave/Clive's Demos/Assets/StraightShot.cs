@@ -9,6 +9,7 @@ public class StraightShot : Shot
 	void Start () 
 	{
 		health = maxHealth;
+		touchDamage = health;
 	}
 	
 	// FixedUpdate is called at a set time interval
@@ -27,6 +28,7 @@ public class StraightShot : Shot
 		if((gameObject.layer == 8) && (col.gameObject.layer == 9) ||
 		   (gameObject.layer == 9) && (col.gameObject.layer == 8))
 		{
+			col.gameObject.GetComponent<Entity>().health -= gameObject.GetComponent<Entity>().health;
 			gameObject.GetComponent<Entity>().health -= col.gameObject.GetComponent<Entity>().touchDamage;
 
 			//If a shot hits anything other than a shot it zeros out it's health.  If a shot hits another shot the weaker one is destroyed
