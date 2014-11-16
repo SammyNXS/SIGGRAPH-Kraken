@@ -29,7 +29,8 @@ public class Turret : NPC
 			
 			Quaternion newRotation = Quaternion.LookRotation(target.transform.position - transform.position, Vector3.up);
 
-			transform.Rotate (newRotation);
+			transform.Rotate (newRotation.eulerAngles);
+
 			shotSpawnRotation = newRotation;
 			
 			weaponChoice = 1;
