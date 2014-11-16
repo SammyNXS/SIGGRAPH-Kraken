@@ -12,7 +12,7 @@ public class Character : Entity
 	{
 		CameraControlExample();
 		MoveExample();
-		if(Input.GetButton("Fire1")) ShootExample();
+		if(Input.GetButton("Fire1")) AttackExample();
 		StatusUpdate();
 	}
 
@@ -73,11 +73,11 @@ public class Character : Entity
 
 	}
 
-	void ShootExample()
+	void AttackExample()
 	{
 		shotSpawnPosition = this.gameObject.transform.position;
 		//shotSpawnRotation = gameObject.transform.rotation;
 		shotSpawnRotation = Camera.mainCamera.transform.rotation;
-		ShotAttack();
+		Attack();
 	}
 }

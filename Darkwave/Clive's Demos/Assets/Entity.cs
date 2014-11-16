@@ -28,28 +28,28 @@ public class Entity : MonoBehaviour
 	public float environmentMoveY = 0;
 	public Vector2 movement;
 
-	//Shot attack variables
+	//Attack variables
 	public int weaponChoice = 1;
 
-	public int shotCooldown1 = 50;
+	public int cooldown1 = 50;
 	public int energyDrain1 = 0;
 	public int currentCooldown1 = 0;
-	public GameObject shot1;
+	public GameObject attack1;
 
-	public int shotCooldown2 = 50;
+	public int cooldown2 = 50;
 	public int energyDrain2 = 5;
 	public int currentCooldown2 = 0;
-	public GameObject shot2;
+	public GameObject attack2;
 
-	public int shotCooldown3 = 50;
+	public int cooldown3 = 50;
 	public int energyDrain3 = 10;
 	public int currentCooldown3 = 0;
-	public GameObject shot3;
+	public GameObject attack3;
 
-	public int shotCooldown4 = 50;
+	public int cooldown4 = 50;
 	public int energyDrain4 = 20;
 	public int currentCooldown4 = 0;
-	public GameObject shot4;
+	public GameObject attack4;
 	
 	public Vector3 shotSpawnPosition;
 	public Quaternion shotSpawnRotation;
@@ -68,43 +68,49 @@ public class Entity : MonoBehaviour
 
 	//Function controlling the usage of shot attacks. May eventually be expanded control of melee attacks.
 		//Called by the child function when the conditions have been.
-	public void ShotAttack()
+	public void Attack()
 	{
 		switch(weaponChoice)
 		{
 			case 1:
 				if(currentCooldown1 == 0)
 				{
-					Instantiate(shot1, shotSpawnPosition, shotSpawnRotation);
-					currentCooldown1 = shotCooldown1;
+					Instantiate(attack1, shotSpawnPosition, shotSpawnRotation);
+					currentCooldown1 = cooldown1;
 					energy -= energyDrain1;
 				}
 				break;
 			case 2:
 				if(currentCooldown2 == 0)
 				{
-					Instantiate(shot2, shotSpawnPosition, shotSpawnRotation);
-					currentCooldown2 = shotCooldown2;
+					Instantiate(attack2, shotSpawnPosition, shotSpawnRotation);
+					currentCooldown2 = cooldown2;
 					energy -= energyDrain2;
 				}
 				break;
 			case 3:
 				if(currentCooldown3 == 0)
 				{
-					Instantiate(shot3, shotSpawnPosition, shotSpawnRotation);
-					currentCooldown3 = shotCooldown3;
+					Instantiate(attack3, shotSpawnPosition, shotSpawnRotation);
+					currentCooldown3 = cooldown3;
 					energy -= energyDrain3;
 				}
 				break;
 			case 4:
 				if(currentCooldown1 == 0)
 				{
-					Instantiate(shot4, shotSpawnPosition, shotSpawnRotation);
-					currentCooldown4 = shotCooldown4;
+					Instantiate(attack4, shotSpawnPosition, shotSpawnRotation);
+					currentCooldown4 = cooldown4;
 					energy -= energyDrain4;
 				}
 				break;
 		}
+	}
+
+	void weaponSwitch(int newWeapon)
+	{
+		//Weapon switch animation
+		weaponChoice = newWeapon;
 	}
 
 	//Stub function for implementation of an animation controller

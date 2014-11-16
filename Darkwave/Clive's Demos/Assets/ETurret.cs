@@ -32,7 +32,7 @@ public class ETurret : Enemy
 			shotSpawnRotation = newRotation;
 			
 			weaponChoice = 1;
-			ShotAttack();
+			Attack();
 			
 			startPosition = transform.position;
 		}

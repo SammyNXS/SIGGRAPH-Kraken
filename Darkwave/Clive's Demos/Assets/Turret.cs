@@ -34,7 +34,7 @@ public class Turret : NPC
 			shotSpawnRotation = newRotation;
 			
 			weaponChoice = 1;
-			ShotAttack();
+			Attack();
 			
 			startPosition = transform.position;
 		}
