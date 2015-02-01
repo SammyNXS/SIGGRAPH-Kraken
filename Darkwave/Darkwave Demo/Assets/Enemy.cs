@@ -9,7 +9,7 @@ public class Enemy : NPC
 	//Updates the target variable every frame to track the player object
 	void Update()
 	{
-		
+		targets = GameObject.FindGameObjectsWithTag("Player");
 	}
 
 	//Controls reactions to collisions

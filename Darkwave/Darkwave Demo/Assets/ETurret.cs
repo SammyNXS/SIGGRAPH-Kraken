@@ -22,7 +22,9 @@ public class ETurret : Enemy
 	//Controls the behavior of the enemy object
 	void EntityAI()
 	{	
-		//if the player is in sight
+		//if a target is in sight
+
+
 		if(target != null && Physics.Raycast (transform.position, target.transform.position - transform.position, sensorRange))
 		{
 			

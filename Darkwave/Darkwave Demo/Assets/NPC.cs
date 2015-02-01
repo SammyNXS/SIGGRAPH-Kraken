@@ -12,8 +12,6 @@ public class NPC : Entity
 	public int interest;
 	public int attentionSpan;
 	public int distance;
-	public GameObject target;
-	public Vector2 targetLastPosition;
 
 	public Vector2 startPosition;
 
@@ -23,6 +21,8 @@ public class NPC : Entity
 	bool isJumping;
 
 	//Attack variables
+	public GameObject target;
+	public Transform targetLastPosition;
 	int weaponChoice  = 1;
 	
 	public int cooldown1 = 50;
@@ -53,13 +53,6 @@ public class NPC : Entity
 	{
 		EntityStart();
 		startPosition = transform.position;
-
-		if(target != null && Physics.Raycast (transform.position, target.transform.position - transform.position, sensorRange))
-		{
-			targetLastPosition = target.transform.position;
-			inSight = true;
-		}
-		else inSight = false;
 	}
 
 	// Update is called once per frame
