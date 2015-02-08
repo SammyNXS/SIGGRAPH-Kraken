@@ -236,5 +236,4 @@ pip-log.txt
 
 [Tt]emp/
 [Ll]ibrary/*
-!Library/*.asset
 [Oo]bj/
