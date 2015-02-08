@@ -21,25 +21,16 @@ public class Character : Entity
 	{
 		EntityUpdate();
 		CameraControlExample();
-		MoveExample();
-		if(Input.GetButton("Fire1")) AttackExample();
+		MoveController();
+		if(Input.GetButtonDown("Fire1")) AttackController(0, true);
+		else if(Input.GetButtonDown("Fire2")) AttackController(1, true);
+
+		if(Input.GetButtonUp("Fire1")) AttackController(0, false);
+		else if(Input.GetButtonUp("Fire2")) AttackController(1, false);
 	}
 
-	void SimpleMoveExample()
+	void MoveController()
 	{
-		float speed = 3.0F;
-		float rotateSpeed = 3.0F;
-
-		CharacterController controller = GetComponent<CharacterController>();
-		transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
-		Vector3 forward = transform.TransformDirection(Vector3.forward);
-		float curSpeed = speed * Input.GetAxis("Vertical");
-		controller.SimpleMove(forward * curSpeed);
-	}
-
-	void MoveExample()
-	{
-		float walkSpeed = 6.0F;
 		float jumpSpeed = 20.0F;
 		float jumpPower = 1.0F;
 
@@ -50,7 +41,7 @@ public class Character : Entity
 
 		moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		moveDirection = transform.TransformDirection(moveDirection);
-		moveDirection *= walkSpeed;
+		moveDirection *= baseSpeed;
 
 		if (controller.isGrounded) 
 		{
@@ -82,11 +73,14 @@ public class Character : Entity
 
 	}
 
-	void AttackExample()
+	void AttackController(int attackType, bool attacking)
 	{
 		switch(weaponChoice)
 		{
 		case 1:
+			if(attackType == 0)
+				weapon1.SendMessage("MainAttackController", attacking);
+			else weapon1.SendMessage("SecondaryAttackController", attacking);
 			break;
 		case 2:
 

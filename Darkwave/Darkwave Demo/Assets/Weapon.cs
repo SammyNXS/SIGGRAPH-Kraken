@@ -4,6 +4,8 @@ using System.Collections;
 public class Weapon : MonoBehaviour 
 {
 	public int weaponType; // 0 Melee, 1 Ranged
+	bool mainAttacking;
+	bool secondaryAttacking;
 	public int cooldown = 50;
 	public int currentCooldown = 0;
 	
@@ -22,9 +24,12 @@ public class Weapon : MonoBehaviour
 	{
 		if(currentEnergy < energy) currentEnergy++;
 		if(currentCooldown > 0) currentCooldown--;
+
+		if(mainAttacking)MainAttack();
+		else if(secondaryAttacking)SecondaryAttack();
 	}
 
-	void OnAttackCommand()
+	void MainAttack()
 	{
 		AttackAnimation();
 		if(currentCooldown == 0)
@@ -45,8 +50,22 @@ public class Weapon : MonoBehaviour
 		}
 	}
 
+	void SecondaryAttack()
+	{
+	}
+
 	void AttackAnimation()
 	{
 		//Trigger animation built into weapon object
+	}
+
+	public void MainAttackController(bool value)
+	{
+		mainAttacking = value;
+	}
+
+	public void SecondaryAttackController(bool value)
+	{
+		secondaryAttacking = value;
 	}
 }

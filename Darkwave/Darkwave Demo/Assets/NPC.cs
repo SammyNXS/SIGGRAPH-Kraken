@@ -12,6 +12,7 @@ public class NPC : Entity
 	public int interest;
 	public int attentionSpan;
 	public int distance;
+	public int energy;
 	public GameObject target;
 	public Vector2 targetLastPosition;
 

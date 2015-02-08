@@ -12,8 +12,6 @@ public class Entity : MonoBehaviour
 	//Status Variables
 	public int health;
 	public int maxHealth;	//set in editor
-	public int energy;
-	public int maxEnergy;	//set in editor
 	public int touchDamage;	//set in editor
 	public int stun=0;
 
@@ -21,13 +19,12 @@ public class Entity : MonoBehaviour
 	//Movement variables
 	public float baseSpeed;	//set in editor
 
-	public bool terrainTouch = false;
+	bool terrainTouch = false;
 	public float yMove = 0;
 
 	public void EntityStart()
 	{
 		health = maxHealth;
-		energy = maxEnergy;
 	}
 
 	//Function used to update entity status. Called from the fixed update of the child object
@@ -60,6 +57,6 @@ public class Entity : MonoBehaviour
 	//Function resets terrainTouch and enviromental movement variables
 	void OnCollisionExit(Collision col)
 	{
-		terrainTouch = false;
+		if(col.gameObject.layer == 0)terrainTouch = false;
 	}
 }
