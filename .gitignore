@@ -235,5 +235,5 @@ pip-log.txt
 *.user
 
 [Tt]emp/
-[Ll]ibrary/*
+Library/*
 [Oo]bj/
