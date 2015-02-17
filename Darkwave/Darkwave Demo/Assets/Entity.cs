@@ -31,8 +31,6 @@ public class Entity : MonoBehaviour
 	public void EntityUpdate()
 	{
 		if(stun > 0) stun--;
-		if(health < 1) Destroy(gameObject);
-		//if(health < 1) Stub for destruction animation control
 	}
 
 	//Stub function for implementation of an animation controller

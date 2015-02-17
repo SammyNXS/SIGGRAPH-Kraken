@@ -67,6 +67,10 @@ public class NPC : Entity
 	public void NPCUpdate () 
 	{
 		EntityUpdate();
+
+		if(health < 1) Destroy(gameObject);
+		//if(health < 1) Stub for destruction animation control
+
 		if(currentCooldown1 > 0) currentCooldown1--;
 		if(currentCooldown2 > 0) currentCooldown2--;
 		if(currentCooldown3 > 0) currentCooldown3--;

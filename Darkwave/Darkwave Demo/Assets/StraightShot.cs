@@ -42,8 +42,8 @@ public class StraightShot : Shot
 
 		}
 		//If a shot hits the terrain it will zero out it's health
-		else if(col.gameObject.layer == 0)
-			gameObject.GetComponent<Entity>().health = 0;
+		else 
+			this.health = 0;
 	}
 
 }

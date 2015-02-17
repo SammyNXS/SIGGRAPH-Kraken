@@ -21,12 +21,16 @@ public class Character : Entity
 	{
 		EntityUpdate();
 		CameraControlExample();
-		MoveController();
-		if(Input.GetButtonDown("Fire1")) AttackController(0, true);
-		else if(Input.GetButtonDown("Fire2")) AttackController(1, true);
 
-		if(Input.GetButtonUp("Fire1")) AttackController(0, false);
-		else if(Input.GetButtonUp("Fire2")) AttackController(1, false);
+		if(health>0)
+		{
+			MoveController();
+			if(Input.GetButtonDown("Fire1")) AttackController(0, true);
+			else if(Input.GetButtonDown("Fire2")) AttackController(1, true);
+
+			if(Input.GetButtonUp("Fire1")) AttackController(0, false);
+			else if(Input.GetButtonUp("Fire2")) AttackController(1, false);
+		}
 	}
 
 	void MoveController()
