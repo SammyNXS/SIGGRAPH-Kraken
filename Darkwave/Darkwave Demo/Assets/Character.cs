@@ -6,11 +6,8 @@ public class Character : Entity
 	float jumpCounter = 0.0F;//Used for MoveController()
 	float hRotation = 0F, vRotation = 0F;//Used in CameraController()
 
-	int weaponChoice = 1;
-	public GameObject weapon1;
-	public GameObject weapon2;
-	public GameObject weapon3;
-	public GameObject weapon4;
+	int weaponChoice = 0;
+	public GameObject[] weapons;
 
 	void Start()
 	{
@@ -25,11 +22,7 @@ public class Character : Entity
 		if(health>0)
 		{
 			MoveController();
-			if(Input.GetButtonDown("Fire1")) AttackController(0, true);
-			else if(Input.GetButtonDown("Fire2")) AttackController(1, true);
-
-			if(Input.GetButtonUp("Fire1")) AttackController(0, false);
-			else if(Input.GetButtonUp("Fire2")) AttackController(1, false);
+			WeaponController();
 		}
 	}
 
@@ -77,24 +70,41 @@ public class Character : Entity
 
 	}
 
-	void AttackController(int attackType, bool attacking)
+	void WeaponController()
 	{
-		switch(weaponChoice)
+		//Weapon chooser
+		if(Input.GetKeyDown(KeyCode.Alpha0)) 
 		{
-		case 1:
-			if(attackType == 0)
-				weapon1.SendMessage("MainAttackController", attacking);
-			else weapon1.SendMessage("SecondaryAttackController", attacking);
-			break;
-		case 2:
+			weapons[weaponChoice].SetActive(false);
+			weaponChoice=0;
+			weapons[weaponChoice].SetActive(true);
 
-			break;
-		case 3:
-
-			break;
-		case 4:
-
-			break;
 		}
+		else if(Input.GetKeyDown(KeyCode.Alpha1)) 
+		{
+			weapons[weaponChoice].SetActive(false);
+			weaponChoice=1;
+			weapons[weaponChoice].SetActive(true);
+		}
+		else if(Input.GetKeyDown(KeyCode.Alpha2)) 
+		{
+			weapons[weaponChoice].SetActive(false);
+			weaponChoice=2;
+			weapons[weaponChoice].SetActive(true);
+
+		}
+		else if(Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			weapons[weaponChoice].SetActive(false);
+			weaponChoice=3;
+			weapons[weaponChoice].SetActive(true);
+		}
+
+		//Attack controller
+		if(Input.GetButtonDown("Fire1")) weapons[weaponChoice].SendMessage("MainAttackController", true);
+		else if(Input.GetButtonDown("Fire2")) weapons[weaponChoice].SendMessage("SecondaryAttackController", true);
+		
+		if(Input.GetButtonUp("Fire1")) weapons[weaponChoice].SendMessage("MainAttackController", false);
+		else if(Input.GetButtonUp("Fire2")) weapons[weaponChoice].SendMessage("SecondaryAttackController", false);
 	}
 }

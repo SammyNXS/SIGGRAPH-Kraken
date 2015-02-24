@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour 
 {
 	public float timer;
+	public GameObject crystal;
 	public GameObject[] players;
+	public List<GameObject> targets;
 	public int[] deaths;
 	// Use this for initialization
 	void Start () 
