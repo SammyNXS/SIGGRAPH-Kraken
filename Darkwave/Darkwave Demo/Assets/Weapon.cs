@@ -40,7 +40,12 @@ public class Weapon : MonoBehaviour
 			}
 			if(weaponType == 1)
 			{
-				Vector3 shotSpawnPosition = this.gameObject.transform.position;
+				//Shot spawn position temporarily changed until correct model can be imported
+				//Vector3 shotSpawnPosition = gameObject.transform.position;
+				Vector3 shotSpawnPosition = new Vector3(
+					gameObject.transform.position.x, 
+					gameObject.transform.position.y+.4f,
+					gameObject.transform.position.z);
 				Quaternion shotSpawnRotation = Camera.mainCamera.transform.rotation;
 
 				Instantiate(shot, shotSpawnPosition, shotSpawnRotation);

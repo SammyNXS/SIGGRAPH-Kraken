@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Character : Entity 
 {
-	float jumpCounter = 0.0F;//Used for MoveExample()
-	float hRotation = 0F, vRotation = 0F;//Used in CameraControlExample()
+	float jumpCounter = 0.0F;//Used for MoveController()
+	float hRotation = 0F, vRotation = 0F;//Used in CameraController()
 
 	int weaponChoice = 1;
 	public GameObject weapon1;
@@ -20,7 +20,7 @@ public class Character : Entity
 	void Update() 
 	{
 		EntityUpdate();
-		CameraControlExample();
+		CameraController();
 
 		if(health>0)
 		{
@@ -36,7 +36,7 @@ public class Character : Entity
 	void MoveController()
 	{
 		float jumpSpeed = 20.0F;
-		float jumpPower = 1.0F;
+		float jumpPower = .5F;
 
 		float gravity = 500.0F;
 		Vector3 moveDirection = Vector3.zero;
@@ -62,7 +62,7 @@ public class Character : Entity
 		
 	}
 
-	void CameraControlExample()
+	void CameraController()
 	{
 		float horizontalSpeed = 7.0F;
 		float verticalSpeed = 7.0F;

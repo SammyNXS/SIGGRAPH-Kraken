@@ -6,12 +6,12 @@ public class ETurret : Enemy
 {
 	void Start()
 	{
-		NPCStart();
+		EnemyStart();
 	}
 	// FixedUpdate is called at a set interval
 	void FixedUpdate () 
 	{
-		NPCUpdate();
+		EnemyUpdate();
 		EntityAI();
 		
 		//Debug.DrawRay (transform.position, target.transform.position - transform.position, rayColor);

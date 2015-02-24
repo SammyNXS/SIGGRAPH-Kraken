@@ -5,12 +5,19 @@ using System.Collections;
 public class Enemy : NPC 
 {
 	public GameObject[] targets;
+	public GameObject currentTarget;
 
-	//Updates the target variable every frame to track the player object
-	void Update()
+	public void EnemyStart()
 	{
-		
+		NPCStart();
 	}
+	
+	public void EnemyUpdate()
+	{
+		NPCUpdate();
+
+	}
+	
 
 	//Controls reactions to collisions
 	void OnCollisionEnter(Collision col)

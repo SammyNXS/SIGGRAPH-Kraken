@@ -8,17 +8,23 @@ public class StraightShot : Shot
 	// Use this for initialization
 	void Start () 
 	{
-		health = maxHealth;
+		ShotStart();
+
 		touchDamage = health;
 	}
-	
+
+	void Update()
+	{
+		ShotUpdate();
+		touchDamage = health;
+	}
+
 	// FixedUpdate is called at a set time interval
 	void FixedUpdate () 
 	{
-		touchDamage = health;
+		
 
 		transform.Translate(new Vector3(0,0,baseSpeed*Time.deltaTime));
-		EntityUpdate();
 	}
 
 	//Controls the shot's behavior when it hits something

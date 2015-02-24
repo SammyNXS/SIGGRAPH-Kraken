@@ -12,7 +12,6 @@ public class GameController : MonoBehaviour
 		timer = 30f * 60;
 		players = GameObject.FindGameObjectsWithTag("Player");
 		deaths = new int[players.Length];
-
 	}
 	
 	// Update is called once per frame
@@ -22,14 +21,13 @@ public class GameController : MonoBehaviour
 		timer-=Time.deltaTime;
 		for(i=0;i<players.Length;i++)
 			if(players[i].GetComponent<Character>().health == 0)
-				Respawner(i);
+				DeathController(i);
 				
 	}
 
-	void Respawner(int player)
+	void DeathController(int player)
 	{
-		float deathTimer= deaths[player]*15;
-		deaths[player]++;
+		float deathTimer= deaths[player]++*15f;
 		while(deathTimer > 0)
 			deathTimer-=Time.deltaTime;
 		players[player].transform.position = this.transform.position;
