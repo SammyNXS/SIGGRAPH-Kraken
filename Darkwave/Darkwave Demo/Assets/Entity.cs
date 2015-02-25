@@ -13,13 +13,13 @@ public class Entity : MonoBehaviour
 	public int health;
 	public int maxHealth;	//set in editor
 	public int touchDamage;	//set in editor
+	public int aggroValue=1;
 	public int stun=0;
 
 
 	//Movement variables
 	public float baseSpeed;	//set in editor
-
-	bool terrainTouch = false;
+	
 	public float yMove = 0;
 
 	public void EntityStart()
@@ -50,11 +50,5 @@ public class Entity : MonoBehaviour
 		{
 			health = 0;
 		}
-	}
-
-	//Function resets terrainTouch and enviromental movement variables
-	void OnCollisionExit(Collision col)
-	{
-		if(col.gameObject.layer == 0)terrainTouch = false;
 	}
 }

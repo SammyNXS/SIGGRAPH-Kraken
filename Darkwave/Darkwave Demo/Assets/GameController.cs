@@ -4,37 +4,28 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour 
 {
-	public float timer;
+	public float roundTimer, timeLeft;
 	public GameObject crystal;
-	public GameObject[] players;
-	public List<GameObject> targets;
-	public int[] deaths;
+	public GameObject litSphere;
+	public GameObject[] allyTargets;
+	public GameObject[] enemyTargets;
+	public float sphereScale;
+
 	// Use this for initialization
 	void Start () 
 	{
-		timer = 30f * 60;
-		players = GameObject.FindGameObjectsWithTag("Player");
-		deaths = new int[players.Length];
+		roundTimer = timeLeft = 30f * 60;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		int i=0;
-		timer-=Time.deltaTime;
-		for(i=0;i<players.Length;i++)
-			if(players[i].GetComponent<Character>().health == 0)
-				DeathController(i);
-				
-	}
-
-	void DeathController(int player)
-	{
-		float deathTimer= deaths[player]++*15f;
-		while(deathTimer > 0)
-			deathTimer-=Time.deltaTime;
-		players[player].transform.position = this.transform.position;
-		players[player].GetComponent<Character>().health = players[player].GetComponent<Character>().maxHealth;
-
+		timeLeft-=Time.deltaTime;
+		sphereScale = 100 + (roundTimer-timeLeft)*0.5f;
+		litSphere.transform.localScale = new Vector3(sphereScale,sphereScale,sphereScale);
+		allyTargets = GameObject.FindGameObjectsWithTag("Enemy");
+		enemyTargets = GameObject.FindGameObjectsWithTag("Ally");
+		if(crystal.GetComponent<Crystal>().health <=0)
+			;//gameover
 	}
 }

@@ -4,8 +4,6 @@ using System.Collections;
 */
 public class Enemy : NPC 
 {
-	public GameObject currentTarget;
-
 	public void EnemyStart()
 	{
 		NPCStart();

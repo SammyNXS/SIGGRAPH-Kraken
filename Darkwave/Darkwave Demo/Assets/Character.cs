@@ -3,8 +3,13 @@ using System.Collections;
 
 public class Character : Entity 
 {
-	float jumpCounter = 0.0F;//Used for MoveController()
-	float hRotation = 0F, vRotation = 0F;//Used in CameraController()
+	//Used for MoveController()
+	float jumpCounter = 0.0F;
+	//Used in CameraController()
+	float hRotation = 0F, vRotation = 0F;
+	//Used in DeathController()
+	public int deathCounter = 0;
+	public float respawnTimer = 0;
 
 	int weaponChoice = 0;
 	public GameObject[] weapons;
@@ -24,6 +29,7 @@ public class Character : Entity
 			MoveController();
 			WeaponController();
 		}
+		else DeathController();
 	}
 
 	void MoveController()
@@ -31,7 +37,6 @@ public class Character : Entity
 		float jumpSpeed = 20.0F;
 		float jumpPower = .5F;
 
-		float gravity = 500.0F;
 		Vector3 moveDirection = Vector3.zero;
 
 		CharacterController controller = GetComponent<CharacterController>();
@@ -50,7 +55,7 @@ public class Character : Entity
 
 		if (Input.GetButton("Jump") && jumpCounter > 0) moveDirection.y = jumpSpeed;
 			
-		moveDirection.y -= gravity * Time.deltaTime;
+		moveDirection.y += Physics.gravity.y;
 		controller.Move(moveDirection * Time.deltaTime);
 		
 	}
@@ -73,27 +78,27 @@ public class Character : Entity
 	void WeaponController()
 	{
 		//Weapon chooser
-		if(Input.GetKeyDown(KeyCode.Alpha0)) 
+		if(Input.GetKeyDown(KeyCode.Alpha1)) 
 		{
 			weapons[weaponChoice].SetActive(false);
 			weaponChoice=0;
 			weapons[weaponChoice].SetActive(true);
 
 		}
-		else if(Input.GetKeyDown(KeyCode.Alpha1)) 
+		else if(Input.GetKeyDown(KeyCode.Alpha2)) 
 		{
 			weapons[weaponChoice].SetActive(false);
 			weaponChoice=1;
 			weapons[weaponChoice].SetActive(true);
 		}
-		else if(Input.GetKeyDown(KeyCode.Alpha2)) 
+		else if(Input.GetKeyDown(KeyCode.Alpha3)) 
 		{
 			weapons[weaponChoice].SetActive(false);
 			weaponChoice=2;
 			weapons[weaponChoice].SetActive(true);
 
 		}
-		else if(Input.GetKeyDown(KeyCode.Alpha3))
+		else if(Input.GetKeyDown(KeyCode.Alpha4))
 		{
 			weapons[weaponChoice].SetActive(false);
 			weaponChoice=3;
@@ -101,10 +106,22 @@ public class Character : Entity
 		}
 
 		//Attack controller
-		if(Input.GetButtonDown("Fire1")) weapons[weaponChoice].SendMessage("MainAttackController", true);
-		else if(Input.GetButtonDown("Fire2")) weapons[weaponChoice].SendMessage("SecondaryAttackController", true);
+		if(Input.GetButtonDown("Fire1")) weapons[weaponChoice].SendMessage("MainActionController", true);
+		else if(Input.GetButtonDown("Fire2")) weapons[weaponChoice].SendMessage("SecondaryActionController", true);
 		
-		if(Input.GetButtonUp("Fire1")) weapons[weaponChoice].SendMessage("MainAttackController", false);
-		else if(Input.GetButtonUp("Fire2")) weapons[weaponChoice].SendMessage("SecondaryAttackController", false);
+		if(Input.GetButtonUp("Fire1")) weapons[weaponChoice].SendMessage("MainActionController", false);
+		else if(Input.GetButtonUp("Fire2")) weapons[weaponChoice].SendMessage("SecondaryActionController", false);
+	}
+
+	void DeathController()
+	{
+		if(respawnTimer == 0) respawnTimer = ++deathCounter * 10f;
+		else if( respawnTimer > 0) respawnTimer-=Time.deltaTime;
+		else
+		{
+			respawnTimer = 0;
+			this.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+			health = maxHealth;
+		}
 	}
 }
