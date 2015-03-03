@@ -8,15 +8,21 @@ public class Character : Entity
 	//Used in CameraController()
 	float hRotation = 0F, vRotation = 0F;
 	//Used in DeathController()
-	public int deathCounter = 0;
-	public float respawnTimer = 0;
+	int deathCounter = 0;
+	float respawnTimer = 0;
+	Vector3 respawnPoint;
 
+	//Used in WeaponController()
 	int weaponChoice = 0;
 	public GameObject[] weapons;
 
 	void Start()
 	{
 		EntityStart();
+		respawnPoint = new Vector3(
+			GameObject.FindGameObjectWithTag("Respawn").transform.position.x+Random.Range(-1,1)*5,
+			GameObject.FindGameObjectWithTag("Respawn").transform.position.y,
+			GameObject.FindGameObjectWithTag("Respawn").transform.position.z+Random.Range(-1,1)*5);
 	}
 
 	void Update() 
@@ -106,11 +112,11 @@ public class Character : Entity
 		}
 
 		//Attack controller
-		if(Input.GetButtonDown("Fire1")) weapons[weaponChoice].SendMessage("MainActionController", true);
-		else if(Input.GetButtonDown("Fire2")) weapons[weaponChoice].SendMessage("SecondaryActionController", true);
+		if(Input.GetButton("Fire1")) weapons[weaponChoice].SendMessage("MainActionController", true);
+		else weapons[weaponChoice].SendMessage("MainActionController", false);
 		
-		if(Input.GetButtonUp("Fire1")) weapons[weaponChoice].SendMessage("MainActionController", false);
-		else if(Input.GetButtonUp("Fire2")) weapons[weaponChoice].SendMessage("SecondaryActionController", false);
+		if(Input.GetButton("Fire2")) weapons[weaponChoice].SendMessage("SecondaryActionController", true);
+		else weapons[weaponChoice].SendMessage("SecondaryActionController", false);
 	}
 
 	void DeathController()
@@ -120,7 +126,7 @@ public class Character : Entity
 		else
 		{
 			respawnTimer = 0;
-			this.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+			this.transform.position = respawnPoint;
 			health = maxHealth;
 		}
 	}
