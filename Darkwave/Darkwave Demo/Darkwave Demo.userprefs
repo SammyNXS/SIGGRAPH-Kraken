@@ -1,0 +1,15 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\Unity Projects\Dark Wave\Dark Wave Nicoli Branch\Assets\Scripts\Character.cs">
+    <Files>
+      <File FileName="..\..\..\..\Unity Projects\Dark Wave\Dark Wave Nicoli Branch\Assets\Scripts\Entity.cs" Line="22" Column="41" />
+      <File FileName="..\..\..\..\Unity Projects\Dark Wave\Dark Wave Nicoli Branch\Assets\Scripts\Architect.cs" Line="15" Column="14" />
+      <File FileName="..\..\..\..\Unity Projects\Dark Wave\Dark Wave Nicoli Branch\Assets\Scripts\AttributeHuntersMomemtum.cs" Line="24" Column="27" />
+      <File FileName="..\..\..\..\Unity Projects\Dark Wave\Dark Wave Nicoli Branch\Assets\Scripts\Character.cs" Line="19" Column="22" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
