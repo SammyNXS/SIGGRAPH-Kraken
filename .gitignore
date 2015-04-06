@@ -221,7 +221,6 @@ pip-log.txt
 [Oo]bj/
 [Bb]uild
 [Ll]ibrary/
-!EditorUserBuildSettings.asset
 sysinfo.txt
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
