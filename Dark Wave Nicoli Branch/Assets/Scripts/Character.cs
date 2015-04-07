@@ -5,6 +5,7 @@ public class Character : Entity
 {
 	float jumpCounter = 0.0F;//Used for MoveExample()
 	float hRotation = 0F, vRotation = 0F;//Used in CameraControlExample()
+	public GUIText focusText; // Used to display how much focus the character has remaining.
 
 	//Shot attack variables are in entity
 
@@ -14,9 +15,16 @@ public class Character : Entity
 		MoveExample();
 		if(Input.GetButton("Fire1")) AttackExample();
 		StatusUpdate();
+		UpdatePlayerGUI();
 	}
 
 	// void HeadShot(){}
+
+	// Update's player-related information every Update(), such as buffs.
+	void UpdatePlayerGUI()
+	{
+		focusText.text = "Focus: " + hasFocus;
+	}
 
 	void SimpleMoveExample()
 	{

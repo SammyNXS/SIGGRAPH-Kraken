@@ -1,11 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Character.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Entity.cs">
     <Files>
-      <File FileName="Assets\Scripts\Entity.cs" Line="22" Column="41" />
-      <File FileName="Assets\Scripts\Architect.cs" Line="15" Column="14" />
-      <File FileName="Assets\Scripts\AttributeHuntersMomemtum.cs" Line="24" Column="27" />
-      <File FileName="Assets\Scripts\Character.cs" Line="19" Column="22" />
+      <File FileName="Assets\Scripts\AttributeHuntersMomemtum.cs" Line="16" Column="29" />
+      <File FileName="Assets\Scripts\Architect.cs" Line="29" Column="25" />
+      <File FileName="Assets\Scripts\Character.cs" Line="24" Column="2" />
+      <File FileName="..\..\..\Unity Projects\Tutorials\Space Shooter\Assets\Scripts\GameController.cs" Line="34" Column="3" />
+      <File FileName="Assets\Scripts\Entity.cs" Line="86" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -17,6 +17,11 @@ public class Entity : MonoBehaviour
 	public int touchDamage;	//set in editor
 	public int stun=0;
 
+	//Status effects.
+	public float hasFocus = 0; //Currently reduces weapon cooldowns. Will change to improving accuracy and melee cleave.
+
+	public float timer = 0; //Used with Time.deltaTime to count down status effects.
+	public float timerCount;
 
 	//Movement variables
 	public float baseSpeed;	//set in editor
@@ -26,9 +31,6 @@ public class Entity : MonoBehaviour
 	public float environmentMoveX = 0;
 	public float environmentMoveY = 0;
 	public Vector2 movement;
-
-	//Status effects.
-	public int hasFocus = 0; //Currently reduces weapon cooldowns. Will change to improving accuracy and melee cleave.
 
 	//Attack variables
 	public int weaponChoice = 1;
@@ -64,9 +66,24 @@ public class Entity : MonoBehaviour
 		if(health < 1) Destroy(gameObject);
 		//if(health < 1) Stub for destruction animation control
 
-		//Check status effects.
+		// Countdown status effects.
+		timer += 1.0F * Time.deltaTime; // Timer increases by one unit times a value in seconds it took to complete the last frame.
+		if (timer >= 1.0F) // If timer is greater than one second.
+		{
+			EffectsTimer(); // Allows effects to run their time and expire.
+			timer = 0.0F; // Reset timer to zero.
+		}
 
-		//Slowed();
+	}
+
+	// Subtracts the timer on status effects by the timer value, simulating a second by second countdown.
+	void EffectsTimer()
+	{
+		// Count down focus if focus is active.
+		if (hasFocus > 0)
+		{
+			hasFocus -= timer;
+		}
 	}
 
 	/* Called every StatusUpdate() call. Reduces current cooldowns of weapons by 1
@@ -75,15 +92,16 @@ public class Entity : MonoBehaviour
 	void Cooldowns ()
 	{
 		// Essentially halves cooldowns.
-		if (hasFocus > 0) {
-			hasFocus--;
+		if (hasFocus > 0)
+		{
 			if(currentCooldown1 > 0) currentCooldown1-=2;
 			if(currentCooldown2 > 0) currentCooldown2-=2;
 			if(currentCooldown3 > 0) currentCooldown3-=2;
 			if(currentCooldown4 > 0) currentCooldown4-=2;
 		} 
 		// Regular cooldowns.
-		else if (hasFocus <= 0) {
+		else if (hasFocus <= 0)
+		{
 			if(currentCooldown1 > 0) currentCooldown1--;
 			if(currentCooldown2 > 0) currentCooldown2--;
 			if(currentCooldown3 > 0) currentCooldown3--;

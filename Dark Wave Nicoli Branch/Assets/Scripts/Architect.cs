@@ -20,6 +20,8 @@ public class Architect : Character
 		AbilitySet(); // Activates the trait abilities.
 	}
 
+	// I think the update function should be moved from Character.cs to Architect.cs and the other two character scripts when created.
+
 	// Called when the player adjusts ability points.
 	void AbilityUnlockMinor()
 	{
@@ -37,7 +39,7 @@ public class Architect : Character
 	// Called when the level starts
 	void AbilitySet()
 	{
-
+		AttributeHuntersMomemtum attributeHuntersMomemtum;
 		/* Current implementation: Also uses the AttributeHuntersMomemtum.cs script to give the Architect
 		 * an initial 10 seconds of focus, and 10 seconds of focus every 10 seconds.
 		 * 
@@ -46,8 +48,8 @@ public class Architect : Character
 		 */
 		if (huntersMomentum == true)
 		{
-			hasFocus += 1000;
-			AttributeHuntersMomemtum attributeHuntersMomemtum = player.GetComponent<AttributeHuntersMomemtum>();
+			hasFocus += 10;
+			attributeHuntersMomemtum = player.GetComponent<AttributeHuntersMomemtum>();
 			attributeHuntersMomemtum.run = true;
 		}
 	}
