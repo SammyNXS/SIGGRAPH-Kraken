@@ -51,7 +51,11 @@ public class Architect : Character
 		 */
 		if (attributeHuntersMomemtum.enabled == true)
 		{
-			hasFocus += 10;
+			attributeHuntersMomemtum.StartEffect();
+		}
+		else
+		{
+			attributeHuntersMomemtum.StopEffect();
 		}
 	}
 }

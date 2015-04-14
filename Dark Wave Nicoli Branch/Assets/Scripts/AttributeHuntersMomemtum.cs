@@ -15,7 +15,16 @@ public class AttributeHuntersMomemtum : MonoBehaviour {
 	{
 		player = GameObject.Find("Character");
 		architect = player.GetComponent<Architect>();
-		InvokeRepeating("Effect",cooldown,cooldown);
+	}
+
+	public void StartEffect()
+	{
+		InvokeRepeating("Effect",0,cooldown);
+	}
+
+	public void StopEffect()
+	{
+		CancelInvoke("Effect");
 	}
 
 	// Called every cooldown seconds.
