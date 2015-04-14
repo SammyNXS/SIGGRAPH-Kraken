@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AttributeHuntersMomemtum.cs">
     <Files>
-      <File FileName="Assets\Scripts\AttributeHuntersMomemtum.cs" Line="27" Column="25" />
-      <File FileName="Assets\Scripts\Architect.cs" Line="55" Column="4" />
+      <File FileName="Assets\Scripts\AttributeHuntersMomemtum.cs" Line="26" Column="3" />
+      <File FileName="Assets\Scripts\Architect.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
