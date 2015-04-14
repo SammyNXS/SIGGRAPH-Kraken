@@ -6,7 +6,8 @@ public class Architect : Character
 	GameObject player; // For referencing the Architect player.
 
 	public int marksmanship; // Value from 0 to 9 determines how many attribute points are in Marksmanship.
-	private bool huntersMomentum = false; // First Marksman trait.
+
+	private AttributeHuntersMomemtum attributeHuntersMomemtum;
 
 	public int structures; // Value from 0 to 9 determines how many attribute points are in Structures.
 	public int perception; // Value from 0 to 9 determines how many attribute points are in Perception.
@@ -15,9 +16,9 @@ public class Architect : Character
 	void Start()
 	{
 		player = GameObject.Find("Character"); // Sets the player GameObject to the Architect.
+		attributeHuntersMomemtum = player.GetComponent<AttributeHuntersMomemtum>();
 
 		AbilityUnlockMinor(); // Sets the boolean minor traits to true or false based on attribute points.
-		AbilitySet(); // Activates the trait abilities.
 	}
 
 	// I think the update function should be moved from Character.cs to Architect.cs and the other two character scripts when created.
@@ -28,29 +29,29 @@ public class Architect : Character
 		// Sets abilities to true or false depending on how many points each trait line has.
 		if (marksmanship >= 1)
 		{
-			huntersMomentum = true;
+			attributeHuntersMomemtum.enabled = true;
 		}
 		else
 		{
-			huntersMomentum = false;
+			attributeHuntersMomemtum.enabled = false;
 		}
+
+		AbilitySet(); // Activates the trait abilities.
 	}
 
 	// Called when the level starts
 	void AbilitySet()
 	{
-		AttributeHuntersMomemtum attributeHuntersMomemtum;
+
 		/* Current implementation: Also uses the AttributeHuntersMomemtum.cs script to give the Architect
 		 * an initial 10 seconds of focus, and 10 seconds of focus every 10 seconds.
 		 * 
 		 * Final implementation: When the Architect's shot strikes an enemy's head,
 		 * the Architect gains focus for 3? seconds.
 		 */
-		if (huntersMomentum == true)
+		if (attributeHuntersMomemtum.enabled == true)
 		{
 			hasFocus += 10;
-			attributeHuntersMomemtum = player.GetComponent<AttributeHuntersMomemtum>();
-			attributeHuntersMomemtum.run = true;
 		}
 	}
 }
