@@ -4,7 +4,6 @@ using System.Collections;
 public class AttributeHuntersMomemtum : MonoBehaviour {
 
 	public float cooldown; // The trait's base cooldown.
-	private float cooldownCounter; // Uses cooldown to calculate periodic activation.
 
 	public float focusIncrease; // How many seconds of focus is granted per periodica activation.
 
@@ -14,24 +13,14 @@ public class AttributeHuntersMomemtum : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-		cooldownCounter = cooldown;
 		player = GameObject.Find("Character");
 		architect = player.GetComponent<Architect>();
+		InvokeRepeating("Effect",cooldown,cooldown);
 	}
 
-	// Called every frame.
-	void Update()
-	{
-		// Activates the trait effect if 
-		if (Time.time >= cooldownCounter)
-		{
-			Effect();
-		}
-	}
-
+	// Called every cooldown seconds.
 	void Effect()
 	{
 		architect.hasFocus += focusIncrease; // Increases the Architect's focus by focusIncrease.
-		cooldownCounter += cooldown; // Increases cooldownCounter by cooldown.
 	}
 }
